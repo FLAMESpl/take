@@ -1,5 +1,5 @@
 # Aplikacja "Ankiety"
 
-[Diagram encji](http://imgur.com/a/sjlle)
+[Diagram encji](docs/entities-diagram.png)
 
-[JSON Api](docs/api.md)
+[Web Api](docs/api.md)
