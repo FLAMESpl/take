@@ -1,61 +1,5 @@
 # WebApi
 
-## Institute
-
-### Object
-
-###### Insitute
-| Type | Name |
-| - | - |
-| uuid | id |
-| string | name |
-| subject[] | subjects |
-
-### Endpoints
-
-#### POST api/institutes
-###### Request
-| Type | Name |
-| - | - |
-| string | name |
-
-###### Response
-| Type | Name |
-| - | - |
-| uuid | id |
-
-#### PUT api/institute/{id}
-###### Request
-| Type | Name |
-| - | - |
-| uuid | id |
-| string | name |
-
-###### Response
-Empty
-
-#### GET api/institute/{id}
-###### Request
-| Type | Name | 
-| - | - |
-| uuid | id |
-
-###### Response
-| Type | Name |
-| - | - |
-| institute | result |
-
-#### GET api/institute
-###### Request
-Empty
-
-###### Response
-| Type | Name | 
-| - | - |
-| int | count |
-| int | totalCount |
-| institute[] | results |
-
 ## Subject
 
 ### Object
@@ -70,11 +14,10 @@ Empty
 
 ### Endpoints
 
-#### POST api/institutes/{institueId}/subjects
+#### POST api/subjects
 ###### Request
 | Type | Name |
 | - | - |
-| uuid | institueId |
 | string | name |
 
 ###### Response
@@ -82,35 +25,31 @@ Empty
 | - | - |
 | uuid | id |
 
-#### PUT api/institute/{institueId}/subjects/{id}
+#### PUT api/subjects/{id}
 ###### Request
 | Type | Name |
 | - | - |
 | uuid | id |
-| uuid | institueId |
 | uuid | headTeacherId |
 | string | name |
 
 ###### Response
 Empty
 
-#### GET api/institute/{institueId}/subjects/{id}
+#### GET api/subjects/{id}
 ###### Request
 | Type | Name |
 | - | - |
 | uuid | id |
-| uuid | institueId |
 
 ###### Response
 | Type | Name |
 | - | - |
 | subject | result |
 
-#### GET api/institute/{institueId}/subjects
+#### GET api/subjects
 ###### Request
-| Type | Name |
-| - | - |
-| uuid | instituteId |
+Empty
 
 ###### Response
 | Type | Name |
