@@ -8,8 +8,6 @@
 | Type | Name |
 | - | - |
 | uuid | id |
-| uuid | headTeacherId |
-| institue | institue |
 | string | name |
 
 ### Endpoints
@@ -30,7 +28,6 @@
 | Type | Name |
 | - | - |
 | uuid | id |
-| uuid | headTeacherId |
 | string | name |
 
 ###### Response
