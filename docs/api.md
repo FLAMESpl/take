@@ -37,7 +37,7 @@ Empty
 #### GET api/institute/{id}
 ###### Request
 | Type | Name | 
-| - | -
+| - | - |
 | uuid | id |
 
 ###### Response
@@ -50,7 +50,7 @@ Empty
 Empty
 
 ###### Response
-| Type | Name | |
+| Type | Name | 
 | - | - |
 | int | count |
 | int | totalCount |
@@ -113,37 +113,37 @@ Empty
 | uuid | instituteId |
 
 ###### Response
-Type | Name |
-- | - |
-int | count |
-int | totalCount |
-subject[] | results |
+| Type | Name |
+| - | - |
+| int | count |
+| int | totalCount |
+| subject[] | results |
 
 ## Survey
 
 ### Object
 
 ###### Survey
-Type | Name |
-- | - |
-uuid | id |
-date | createdAt |
-string | description |
-question[] | questions |
+| Type | Name |
+| - | - |
+| uuid | id |
+| date | createdAt |
+| string | description |
+| question[] | questions |
 
 ### Endpoints
 
 #### POST api/surveys/{id}
 ###### Request
-Type | Name |
-- | - |
-string | description |
-uuid[] | questionIds |
+| Type | Name |
+| - | - |
+| string | description |
+| uuid[] | questionIds |
 
 ###### Response
-Type | Name |
-- | - |
-uuid | id |
+| Type | Name |
+| - | - |
+| uuid | id |
 
 #### PUT api/surveys/{id}
 ###### Request
