@@ -12,12 +12,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int idq;
+	String text;
+	
 	@Id
 	@GeneratedValue
 	@XmlAttribute
-	int idq;
-	String text;
-	
 	public int getIdq(){
 		return idq;
 	}
