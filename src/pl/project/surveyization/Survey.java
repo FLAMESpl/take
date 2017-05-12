@@ -1,4 +1,4 @@
-package pl.project.surveys;
+package pl.project.surveyization;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -19,22 +19,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Survey implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private int ids;
+	String description;
+	String date;
+	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	//List<Question> questions = new ArrayList<Question>();
+	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	//List<FilledSurvey> filledSurveys = new ArrayList<FilledSurvey>();
+	
 	@Id
 	@GeneratedValue
 	@XmlAttribute
-	int ids;
-	String description;
-	Date date;
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	List<Question> questions = new ArrayList<Question>();
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	List<FilledSurvey> filledSurveys = new ArrayList<FilledSurvey>();
-	
 	public int getIds(){
 		return ids;
 	}
-	public void setIds(int idc) {
-		this.ids = idc;
+	public void setIds(int ids) {
+		this.ids = ids;
 	}
 	public String getDescription(){
 		return description;
@@ -42,23 +42,23 @@ public class Survey implements Serializable {
 	public void setDescription(String description){
 		this.description = description;
 	}
-	public Date getDate(){
+	public String getDate(){
 		return date;
 	}
-	public void setDate(Date date){
+	public void setDate(String date){
 		this.date = date;
 	}
-	public List<Question> getQuestions(){
-		return questions;
-	}
-	public void setQuestions(List<Question> questions){
-		this.questions = questions;
-	}
-	public List<FilledSurvey> getFilledSurveys(){
-		return filledSurveys;
-	}
-	public void setFilledSurveys(List<FilledSurvey> filledSurveys){
-		this.filledSurveys = filledSurveys;
-	}
+	//public List<Question> getQuestions(){
+	//	return questions;
+	//}
+	//public void setQuestions(List<Question> questions){
+	//	this.questions = questions;
+	//}
+	//public List<FilledSurvey> getFilledSurveys(){
+	//	return filledSurveys;
+	//}
+	//public void setFilledSurveys(List<FilledSurvey> filledSurveys){
+	//	this.filledSurveys = filledSurveys;
+	//}
 	
 }

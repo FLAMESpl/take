@@ -1,4 +1,4 @@
-package pl.project.surveys;
+package pl.project.surveyization;
 
 import java.util.List;
 

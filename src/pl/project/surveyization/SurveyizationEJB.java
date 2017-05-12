@@ -1,4 +1,4 @@
-package pl.project.surveys;
+package pl.project.surveyization;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class SurveyizationEJB {
 		return manager.find(Survey.class, ids);
 	}
 	public List<Survey> get(){
-		Query q = manager.createQuery("select s from Surveys s");
+		Query q = manager.createQuery("select s from Survey s");
 		@SuppressWarnings("unchecked")
 		List<Survey> list = q.getResultList();
 		return list;

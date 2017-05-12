@@ -1,4 +1,4 @@
-package pl.project.surveys;
+package pl.project.surveyization;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +22,6 @@ public class Teacher implements Serializable {
 	int idt;
 	String firstName;
 	String lastName;
-	@OneToMany(mappedBy="evaluated",fetch=FetchType.LAZY)
-	List<FilledSurvey> surveys = new ArrayList<FilledSurvey>();
+	//@OneToMany(mappedBy="evaluated",fetch=FetchType.LAZY)
+	//List<FilledSurvey> surveys = new ArrayList<FilledSurvey>();
 }

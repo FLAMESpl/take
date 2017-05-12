@@ -1,4 +1,4 @@
-package pl.project.surveys;
+package pl.project.surveyization;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Surveys {
-	public List<Survey> surveys = new ArrayList<Survey>();
+	private List<Survey> surveys = new ArrayList<Survey>();
 		
 	public Surveys(List<Survey> surveys){
 		this.surveys = surveys;
 	}
-	public Surveys() {}
+	public Surveys() { }
 	
 	public List<Survey> getSurveys(){
 		return surveys;
