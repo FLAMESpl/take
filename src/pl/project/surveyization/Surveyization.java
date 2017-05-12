@@ -13,6 +13,6 @@ public interface Surveyization {
 
 	public abstract String update(Survey survey);
 
-	public abstract void delete(int ids);
+	public abstract String delete(int ids);
 	
 }

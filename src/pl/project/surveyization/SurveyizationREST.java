@@ -58,8 +58,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@DELETE
 	@Path("/{ids}")
-	public void delete(@PathParam ("ids") int ids) {
-		bean.delete(ids);		
+	public String delete(@PathParam ("ids") int ids) {
+		bean.delete(ids);	
+		return "survey deleted";
 	}
 
 }
