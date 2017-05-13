@@ -37,7 +37,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@GET
-	public Surveys getSurveys() {
+	public Surveys get() {
 		List<Survey> list = bean.get();
 		Surveys surveys = new Surveys(list);
 		return surveys;
@@ -51,7 +51,7 @@ public class SurveyizationREST implements Surveyization {
 			return "survey updated!";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "survye not updated :(";
+			return "survey not updated :(";
 		}
 	}
 
