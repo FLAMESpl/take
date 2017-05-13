@@ -1,12 +1,9 @@
 package pl.project.surveyization;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -25,7 +23,7 @@ public class Survey implements Serializable {
 	String description;
 	String date;
 	
-	List<Question> question = new ArrayList<Question>();
+	List<Question> questions = new ArrayList<Question>();
 	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	//List<FilledSurvey> filledSurveys = new ArrayList<FilledSurvey>();
 	
@@ -50,13 +48,15 @@ public class Survey implements Serializable {
 	public void setDate(String date){
 		this.date = date;
 	}
-	@Access(AccessType.PROPERTY)
-	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	public List<Question> getQuestion(){
-		return question;
+	@XmlElement
+	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
+	public List<Question> getQuestions(){
+		return questions;
 	}
-	public void setQuestion(List<Question> question){
-		this.question = question;
+	public void setQuestions(List<Question> questions){
+		for (Question q : questions)
+			q.survey = this;
+		this.questions = questions;
 	}
 	//public List<FilledSurvey> getFilledSurveys(){
 	//	return filledSurveys;
