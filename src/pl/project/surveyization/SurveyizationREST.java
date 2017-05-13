@@ -37,7 +37,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@GET
-	public Surveys get() {
+	public Surveys getSurveys() {
 		List<Survey> list = bean.get();
 		Surveys surveys = new Surveys(list);
 		return surveys;

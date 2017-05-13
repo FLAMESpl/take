@@ -22,8 +22,8 @@ public class Survey implements Serializable {
 	private int ids;
 	String description;
 	String date;
-	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	//List<Question> questions = new ArrayList<Question>();
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="survey")
+	List<Question> questions = new ArrayList<Question>();
 	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	//List<FilledSurvey> filledSurveys = new ArrayList<FilledSurvey>();
 	
@@ -48,12 +48,12 @@ public class Survey implements Serializable {
 	public void setDate(String date){
 		this.date = date;
 	}
-	//public List<Question> getQuestions(){
-	//	return questions;
-	//}
-	//public void setQuestions(List<Question> questions){
-	//	this.questions = questions;
-	//}
+	public List<Question> getQuestions(){
+		return questions;
+	}
+	public void setQuestions(List<Question> questions){
+		this.questions = questions;
+	}
 	//public List<FilledSurvey> getFilledSurveys(){
 	//	return filledSurveys;
 	//}

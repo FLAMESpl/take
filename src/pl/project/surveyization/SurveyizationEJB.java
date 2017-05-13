@@ -15,6 +15,8 @@ public class SurveyizationEJB {
 	
 	public void create(Survey survey) {
 		System.out.println("Creating survey!");
+		for (Question q : survey.questions)
+			manager.persist(q);
 		manager.persist(survey);
 	}
 	public void delete(int ids) {
