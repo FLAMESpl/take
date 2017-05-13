@@ -9,7 +9,7 @@ public interface Surveyization {
 	
 	public abstract Survey find(int ids);
 
-	public abstract Surveys getSurveys();
+	public abstract Surveys get();
 
 	public abstract String update(Survey survey);
 

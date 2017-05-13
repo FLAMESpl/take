@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,8 +24,8 @@ public class Survey implements Serializable {
 	private int ids;
 	String description;
 	String date;
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="survey")
-	List<Question> questions = new ArrayList<Question>();
+	
+	List<Question> question = new ArrayList<Question>();
 	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	//List<FilledSurvey> filledSurveys = new ArrayList<FilledSurvey>();
 	
@@ -48,11 +50,13 @@ public class Survey implements Serializable {
 	public void setDate(String date){
 		this.date = date;
 	}
-	public List<Question> getQuestions(){
-		return questions;
+	@Access(AccessType.PROPERTY)
+	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	public List<Question> getQuestion(){
+		return question;
 	}
-	public void setQuestions(List<Question> questions){
-		this.questions = questions;
+	public void setQuestion(List<Question> question){
+		this.question = question;
 	}
 	//public List<FilledSurvey> getFilledSurveys(){
 	//	return filledSurveys;
