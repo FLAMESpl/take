@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @Entity
 @XmlRootElement
 public class Survey implements Serializable {
@@ -54,10 +53,12 @@ public class Survey implements Serializable {
 		return questions;
 	}
 	public void setQuestions(List<Question> questions){
+		if(questions != null){
 		for (Question q : questions)
 			q.survey = this;
+		}
 		this.questions = questions;
-	}
+		}
 	//public List<FilledSurvey> getFilledSurveys(){
 	//	return filledSurveys;
 	//}
