@@ -19,11 +19,18 @@ public class SurveyizationEJB {
 	}
 	public void deleteSurvey(int ids) {
 		System.out.println("Deleting survey!");
-		Survey survey = manager.find(Survey.class, ids);
-		manager.remove(survey);
+		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
+		q.setParameter("ids", ids);
+		@SuppressWarnings("unchecked")
+		List<Survey> list = q.getResultList();
+		manager.remove( list.get(0));
 	}
 	public Survey findSurvey(int ids) {
-		return manager.find(Survey.class, ids);
+		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
+		q.setParameter("ids", ids);
+		@SuppressWarnings("unchecked")
+		List<Survey> list = q.getResultList();
+		return list.get(0);
 	}
 	public List<Survey> getSurvey(){
 		Query q = manager.createQuery("select s from Survey s");
@@ -40,11 +47,18 @@ public class SurveyizationEJB {
 	}
 	public void deleteFilledSurvey(int idf) {
 		System.out.println("Deleting filled!");
-		FilledSurvey filled = manager.find(FilledSurvey.class, idf);
-		manager.remove(filled);
+		Query q = manager.createQuery("select f from Survey f where f.idf = :idf");
+		q.setParameter("idf", idf);
+		@SuppressWarnings("unchecked")
+		List<FilledSurvey> list = q.getResultList();
+		manager.remove( list.get(0));
 	}
 	public FilledSurvey findFilledSurvey(int idf) {
-		return manager.find(FilledSurvey.class, idf);
+		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
+		q.setParameter("idf", idf);
+		@SuppressWarnings("unchecked")
+		List<FilledSurvey> list = q.getResultList();
+		return list.get(0);
 	}
 	public List<FilledSurvey> getFilledSurvey(){
 		Query q = manager.createQuery("select f from FilledSurvey f");
@@ -61,11 +75,18 @@ public class SurveyizationEJB {
 	}
 	public void deleteTeacher(int idt) {
 		System.out.println("Deleting teacher!");
-		Teacher teacher = manager.find(Teacher.class, idt);
-		manager.remove(teacher);
+		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
+		q.setParameter("idt", idt);
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = q.getResultList();
+		manager.remove( list.get(0));
 	}
 	public Teacher findTeacher(int idt) {
-		return manager.find(Teacher.class, idt);
+		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
+		q.setParameter("idt", idt);
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = q.getResultList();
+		return list.get(0);
 	}
 	public List<Teacher> getTeacher(){
 		Query q = manager.createQuery("select t from Teacher t");
