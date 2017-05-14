@@ -5,6 +5,7 @@
 	<persistence-unit name="surveyization">
 		<jta-data-source>java:/DefaultDS</jta-data-source>
 		<class>pl.project.surveyization.Survey</class>
+		<class>pl.project.surveyization.FilledSurvey</class>
 
 		<properties>
 			<!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->

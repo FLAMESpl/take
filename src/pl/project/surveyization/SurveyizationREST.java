@@ -47,7 +47,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@PUT
-	@Path("/survey")
+	@Path("/survey}")
 	public String update(Survey survey) {
 		try {
 			bean.updateSurvey(survey);
@@ -111,5 +111,50 @@ public class SurveyizationREST implements Surveyization {
 		bean.deleteFilledSurvey(idf);	
 		return "FilledSurvey deleted";
 	}
+	
+	@Override
+	@POST
+	@Path("/teacher")
+	public String create(Teacher teacher) {
+		bean.create(teacher);
+		return "teacher created!";
+	}
 
+	@Override
+	@GET
+	@Path("/teacher/{ids}")
+	public Teacher findTeacher(@PathParam("idt") int idt) {
+		Teacher teacher = bean.findTeacher(idt);
+		return teacher;
+	}
+
+	@Override
+	@GET
+	@Path("/teacher")
+	public Teachers getTeachers() {
+		List<Teacher> list = bean.getTeacher();
+		Teachers teachers = new Teachers(list);
+		return teachers;
+	}
+
+	@Override
+	@PUT
+	@Path("/teacher}")
+	public String update(Teacher teacher) {
+		try {
+			bean.updateTeacher(teacher);
+			return "teacher updated!";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "teacher not updated :(";
+		}
+	}
+
+	@Override
+	@DELETE
+	@Path("/teacher/{ids}")
+	public String deleteTeacher(@PathParam ("idt") int idt) {
+		bean.deleteTeacher(idt);	
+		return "teacher deleted";
+	}
 }

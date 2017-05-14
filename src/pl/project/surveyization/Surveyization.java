@@ -25,4 +25,14 @@ public interface Surveyization {
 	
 	public abstract String deleteFilledSurvey(int idf);
 	
+	public abstract String create(Teacher teacher);
+	
+	public abstract Teacher findTeacher(int idt);
+
+	public abstract Teachers getTeachers();
+
+	public abstract String update(Teacher teacher);
+
+	public abstract String deleteTeacher(int idt);
+	
 }
