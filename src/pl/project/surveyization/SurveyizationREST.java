@@ -39,9 +39,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/survey")
-	public Surveys getSurveys() {
+	public ListResponse<Survey> getSurveys() {
 		List<Survey> list = bean.getSurvey();
-		Surveys surveys = new Surveys(list);
+		ListResponse<Survey> surveys = new ListResponse<Survey>(list);
 		return surveys;
 	}
 
@@ -85,9 +85,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/filledsurvey")
-	public FilledSurveys getFilledSurveys() {
+	public ListResponse<FilledSurvey> getFilledSurveys() {
 		List<FilledSurvey> list = bean.getFilledSurvey();
-		FilledSurveys filled = new FilledSurveys(list);
+		ListResponse<FilledSurvey> filled = new ListResponse<FilledSurvey>(list);
 		return filled;
 	}
 
@@ -131,9 +131,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/teacher")
-	public Teachers getTeachers() {
+	public ListResponse<Teacher> getTeachers() {
 		List<Teacher> list = bean.getTeacher();
-		Teachers teachers = new Teachers(list);
+		ListResponse<Teacher> teachers = new ListResponse<Teacher>(list);
 		return teachers;
 	}
 
