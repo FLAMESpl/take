@@ -61,7 +61,7 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@DELETE
 	@Path("/survey/{ids}")
-	public String deleteSurvey(@PathParam ("ids") int ids) {
+	public String deleteSurvey(@PathParam("ids") int ids) {
 		bean.deleteSurvey(ids);	
 		return "survey deleted";
 	}
@@ -77,7 +77,7 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/filledsurvey/{idf}")
-	public FilledSurvey findFilledSurvey(int idf) {
+	public FilledSurvey findFilledSurvey(@PathParam("idf") int idf) {
 		FilledSurvey filled = bean.findFilledSurvey(idf);
 		return filled;
 	}
@@ -107,7 +107,7 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@DELETE
 	@Path("/filledsurvey/{idf}")
-	public String deleteFilledSurvey(int idf) {
+	public String deleteFilledSurvey(@PathParam ("idf") int idf) {
 		bean.deleteFilledSurvey(idf);	
 		return "FilledSurvey deleted";
 	}

@@ -4,8 +4,10 @@ import java.util.List;
 
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlRootElement
+@XmlSeeAlso({Survey.class,FilledSurvey.class,Teacher.class})
 public class ListResponse<T> {
 
 	private List<T> list = new ArrayList<T>();

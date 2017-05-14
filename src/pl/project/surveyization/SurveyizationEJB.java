@@ -47,7 +47,7 @@ public class SurveyizationEJB {
 	}
 	public void deleteFilledSurvey(int idf) {
 		System.out.println("Deleting filled!");
-		Query q = manager.createQuery("select f from Survey f where f.idf = :idf");
+		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
 		q.setParameter("idf", idf);
 		@SuppressWarnings("unchecked")
 		List<FilledSurvey> list = q.getResultList();
