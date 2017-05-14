@@ -122,7 +122,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@GET
-	@Path("/teacher/{ids}")
+	@Path("/teacher/{idt}")
 	public Teacher findTeacher(@PathParam("idt") int idt) {
 		Teacher teacher = bean.findTeacher(idt);
 		return teacher;
@@ -152,7 +152,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@DELETE
-	@Path("/teacher/{ids}")
+	@Path("/teacher/{idt}")
 	public String deleteTeacher(@PathParam ("idt") int idt) {
 		bean.deleteTeacher(idt);	
 		return "teacher deleted";
