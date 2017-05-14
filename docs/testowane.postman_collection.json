@@ -8,26 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "zapisz auto",
-			"request": {
-				"url": "http://localhost:8080/take/komis/get",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/xml",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<car>\n\t<make>Fiat</make>\n\t<model>Brava</model>\n\t<regNum>SH12345</regNum>\n\t<price>1000</price>\n</car>"
-				},
-				"description": "wysyłam sobie do bazy samochod"
-			},
-			"response": []
-		},
-		{
 			"name": "survey",
 			"request": {
 				"url": "http://localhost:8080/take/surveyization",
