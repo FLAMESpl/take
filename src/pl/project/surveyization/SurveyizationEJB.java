@@ -55,4 +55,25 @@ public class SurveyizationEJB {
 	public void updateFilledSurvey(FilledSurvey filled){
 		filled = manager.merge(filled);
 	}
+	public void create(Teacher teacher) {
+		System.out.println("Creating teacher!");
+		manager.persist(teacher);
+	}
+	public void deleteTeacher(int idt) {
+		System.out.println("Deleting teacher!");
+		Teacher teacher = manager.find(Teacher.class, idt);
+		manager.remove(teacher);
+	}
+	public Teacher findTeacher(int idt) {
+		return manager.find(Teacher.class, idt);
+	}
+	public List<Teacher> getTeacher(){
+		Query q = manager.createQuery("select t from Teacher t");
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = q.getResultList();
+		return list;
+	}
+	public void updateTeacher(Teacher teacher){
+		teacher = manager.merge(teacher);
+	}
 }
