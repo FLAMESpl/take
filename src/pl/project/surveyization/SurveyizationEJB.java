@@ -2,7 +2,6 @@ package pl.project.surveyization;
 
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,8 +16,9 @@ public class SurveyizationEJB {
 	public void create(Survey survey) {
 		System.out.println("Creating survey!");
 		if(survey.getQuestions() != null){
-		for (Question q : survey.getQuestions())
-			q.survey = survey;
+			for (Question q : survey.getQuestions()){
+				q.survey = survey;
+			}
 		}
 		manager.persist(survey);
 	}
@@ -49,7 +49,19 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", filled.ids);
 		Survey survey = (Survey)q.getSingleResult();
+		q = manager.createQuery("select t from Teacher t where t.idt like :idt");
+		q.setParameter("idt", filled.idt);
+		Teacher teacher = (Teacher)q.getSingleResult();
 		filled.setParent(survey);
+		filled.setEvaluated(teacher);
+		if(filled.getAnswers() != null){
+			for (Answer a : filled.getAnswers()){
+				q = manager.createQuery("select q from Question q where q.idq like :idq");
+				q.setParameter("idq", a.idq);
+				Question quest = (Question)q.getSingleResult();
+				a.setQuestion(quest);
+			}
+		}
 		manager.persist(filled);
 	}
 	public void deleteFilledSurvey(int idf) {

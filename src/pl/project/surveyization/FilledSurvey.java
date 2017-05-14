@@ -22,9 +22,11 @@ public class FilledSurvey implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idf;
 	int ids;
+	int idt;
 	String description;
 	String date;
 	Survey parent;
+	Teacher evaluated;
 	Set<Answer> answers = new HashSet<Answer>();
 	
 	@Id
@@ -53,6 +55,20 @@ public class FilledSurvey implements Serializable {
 	}
 	public void setIds(int ids){
 		this.ids = ids;
+	}
+	public int getIdt(){
+		return idt;
+	}
+	public void setIdt(int idt){
+		this.idt = idt;
+	}
+	@ManyToOne
+	@XmlTransient
+	public Teacher getEvaluated(){
+		return evaluated;
+	}
+	public void setEvaluated(Teacher teacher){
+		this.evaluated = teacher;
 	}
 	@ManyToOne
 	@XmlTransient

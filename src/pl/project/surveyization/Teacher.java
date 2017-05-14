@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Teacher implements Serializable {
 	String firstName;
 	String lastName;
 	
-	//Set<FilledSurvey> surveys = new HashSet<FilledSurvey>();
+	Set<FilledSurvey> surveys = new HashSet<FilledSurvey>();
 	
 	@Id
 	@GeneratedValue
@@ -44,12 +45,12 @@ public class Teacher implements Serializable {
 	public void setLastName(String lastName){
 		this.lastName = lastName;
 	}
-	//@XmlElement
-	//@OneToMany(mappedBy="evaluated",fetch=FetchType.LAZY)
-	//public Set<FilledSurvey> getFilledSurveys(){
-	//	return surveys;
-	//}
-	//public void setFilledSurveys(Set<Survey> surveys){
-	//	this.surveys = surveys;
-	//}
+	@XmlElement
+	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="evaluated",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=false)
+	public Set<FilledSurvey> getFilledSurveys(){
+		return surveys;
+	}
+	public void setFilledSurveys(Set<FilledSurvey> surveys){
+		this.surveys = surveys;
+	}
 }

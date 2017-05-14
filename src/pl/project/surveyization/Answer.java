@@ -15,8 +15,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int ida;
+	int idq;
+	Question question;
 	FilledSurvey filledSurvey;
 	String text;	
+	
 	@Id
 	@GeneratedValue
 	@XmlAttribute
@@ -31,6 +34,20 @@ public class Answer implements Serializable {
 	}
 	public void setText(String text){
 		this.text = text;
+	}
+	public int getIdq() {
+		return idq;
+	}
+	public void setIdq(int idq) {
+		this.idq = idq;
+	}
+	@ManyToOne
+	@XmlTransient
+	public Question getQuestion(){
+		return question;
+	}
+	public void setQuestion(Question question){
+		this.question = question;
 	}
 	@ManyToOne
 	@XmlTransient
