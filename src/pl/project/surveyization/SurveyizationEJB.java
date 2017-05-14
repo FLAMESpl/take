@@ -43,8 +43,8 @@ public class SurveyizationEJB {
 		FilledSurvey filled = manager.find(FilledSurvey.class, idf);
 		manager.remove(filled);
 	}
-	public FilledSurvey findFilledSurvey(int ids) {
-		return manager.find(FilledSurvey.class, ids);
+	public FilledSurvey findFilledSurvey(int idf) {
+		return manager.find(FilledSurvey.class, idf);
 	}
 	public List<FilledSurvey> getFilledSurvey(){
 		Query q = manager.createQuery("select f from FilledSurvey f");

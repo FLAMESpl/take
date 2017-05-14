@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int ida;
-	FilledSurvey filled;
+	FilledSurvey filledSurvey;
 	String text;	
 	@Id
 	@GeneratedValue
@@ -35,9 +35,9 @@ public class Answer implements Serializable {
 	@ManyToOne
 	@XmlTransient
 	public FilledSurvey getFilledSurvey(){
-		return filled;
+		return filledSurvey;
 	}
-	public void setFilledSurvey(FilledSurvey filled){
-		this.filled = filled;
+	public void setFilledSurvey(FilledSurvey filledsurvey){
+		this.filledSurvey = filledsurvey;
 	}
 }

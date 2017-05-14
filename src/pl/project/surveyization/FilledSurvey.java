@@ -45,14 +45,14 @@ public class FilledSurvey implements Serializable {
 		this.date = date;
 	}
 	@XmlElement
-	@OneToMany(targetEntity=Answer.class,mappedBy="filled",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(targetEntity=Answer.class,mappedBy="filledSurvey",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 	public List<Answer> getAnswers(){
 		return answers;
 	}
 	public void setAnswers(List<Answer> answers){
 		if(answers != null){
 		for (Answer q : answers)
-			q.filled = this;
+			q.filledSurvey = this;
 		}
 		this.answers = answers;
 		}
