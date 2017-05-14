@@ -1,8 +1,8 @@
 package pl.project.surveyization;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,9 +22,8 @@ public class Survey implements Serializable {
 	String description;
 	String date;
 	
-	List<Question> questions = new ArrayList<Question>();
-	//@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	//List<FilledSurvey> filledSurveys = new ArrayList<FilledSurvey>();
+	Set<Question> questions = new HashSet<Question>();
+	Set<FilledSurvey> filledSurveys = new HashSet<FilledSurvey>();
 	
 	@Id
 	@GeneratedValue
@@ -49,21 +48,19 @@ public class Survey implements Serializable {
 	}
 	@XmlElement
 	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
-	public List<Question> getQuestions(){
+	public Set<Question> getQuestions(){
 		return questions;
 	}
-	public void setQuestions(List<Question> questions){
-		if(questions != null){
-		for (Question q : questions)
-			q.survey = this;
-		}
+	public void setQuestions(Set<Question> questions){
 		this.questions = questions;
 		}
-	//public List<FilledSurvey> getFilledSurveys(){
-	//	return filledSurveys;
-	//}
-	//public void setFilledSurveys(List<FilledSurvey> filledSurveys){
-	//	this.filledSurveys = filledSurveys;
-	//}
+	@XmlElement
+	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="parent",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=false)
+	public Set<FilledSurvey> getFilledSurveys(){
+		return filledSurveys;
+	}
+	public void setFilledSurveys(Set<FilledSurvey> filledSurveys){
+		this.filledSurveys = filledSurveys;
+	}
 	
 }

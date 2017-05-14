@@ -1,8 +1,8 @@
 package pl.project.surveyization;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -19,8 +20,8 @@ public class Teacher implements Serializable {
 	private int idt;
 	String firstName;
 	String lastName;
-	//@OneToMany(mappedBy="evaluated",fetch=FetchType.LAZY)
-	//List<FilledSurvey> surveys = new ArrayList<FilledSurvey>();
+	
+	//Set<FilledSurvey> surveys = new HashSet<FilledSurvey>();
 	
 	@Id
 	@GeneratedValue
@@ -43,10 +44,12 @@ public class Teacher implements Serializable {
 	public void setLastName(String lastName){
 		this.lastName = lastName;
 	}
-	//public List<FilledSurvey> getFilledSurveys(){
+	//@XmlElement
+	//@OneToMany(mappedBy="evaluated",fetch=FetchType.LAZY)
+	//public Set<FilledSurvey> getFilledSurveys(){
 	//	return surveys;
 	//}
-	//public void setFilledSurveys(List<Survey> surveys){
+	//public void setFilledSurveys(Set<Survey> surveys){
 	//	this.surveys = surveys;
 	//}
 }
