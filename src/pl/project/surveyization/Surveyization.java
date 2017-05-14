@@ -9,7 +9,7 @@ public interface Surveyization {
 	
 	public abstract Survey findSurvey(int ids);
 
-	public abstract ListResponse<Survey> getSurveys();
+	public abstract SetResponse<Survey> getSurveys();
 
 	public abstract String update(Survey survey);
 
@@ -19,7 +19,7 @@ public interface Surveyization {
 	
 	public abstract FilledSurvey findFilledSurvey(int idf);
 	
-	public abstract ListResponse<FilledSurvey> getFilledSurveys();
+	public abstract SetResponse<FilledSurvey> getFilledSurveys();
 	
 	public abstract String update(FilledSurvey filled);
 	
@@ -29,7 +29,7 @@ public interface Surveyization {
 	
 	public abstract Teacher findTeacher(int idt);
 
-	public abstract ListResponse<Teacher> getTeachers();
+	public abstract SetResponse<Teacher> getTeachers();
 
 	public abstract String update(Teacher teacher);
 

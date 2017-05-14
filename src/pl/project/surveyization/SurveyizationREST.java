@@ -2,6 +2,7 @@ package pl.project.surveyization;
 
 import java.util.List;
 
+
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,7 +26,7 @@ public class SurveyizationREST implements Surveyization {
 	@Path("/survey")
 	public String create(Survey survey) {
 		bean.create(survey);
-		return "survey created!";
+		return "survey created!" + survey.getIds();
 	}
 
 	@Override
@@ -39,9 +40,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/survey")
-	public ListResponse<Survey> getSurveys() {
-		List<Survey> list = bean.getSurvey();
-		ListResponse<Survey> surveys = new ListResponse<Survey>(list);
+	public SetResponse<Survey> getSurveys() {
+		List<Survey> list = bean.getSurveys();
+		SetResponse<Survey> surveys = new SetResponse<Survey>(list);
 		return surveys;
 	}
 
@@ -71,7 +72,7 @@ public class SurveyizationREST implements Surveyization {
 	@Path("/filledsurvey")
 	public String create(FilledSurvey filled) {
 		bean.create(filled);
-		return "FilledSurvey created!";
+		return "FilledSurvey created!" + filled.getIdf();
 	}
 
 	@Override
@@ -85,9 +86,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/filledsurvey")
-	public ListResponse<FilledSurvey> getFilledSurveys() {
+	public SetResponse<FilledSurvey> getFilledSurveys() {
 		List<FilledSurvey> list = bean.getFilledSurvey();
-		ListResponse<FilledSurvey> filled = new ListResponse<FilledSurvey>(list);
+		SetResponse<FilledSurvey> filled = new SetResponse<FilledSurvey>(list);
 		return filled;
 	}
 
@@ -117,7 +118,7 @@ public class SurveyizationREST implements Surveyization {
 	@Path("/teacher")
 	public String create(Teacher teacher) {
 		bean.create(teacher);
-		return "teacher created!";
+		return "teacher created!" + teacher.getIdt();
 	}
 
 	@Override
@@ -131,9 +132,9 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@GET
 	@Path("/teacher")
-	public ListResponse<Teacher> getTeachers() {
+	public SetResponse<Teacher> getTeachers() {
 		List<Teacher> list = bean.getTeacher();
-		ListResponse<Teacher> teachers = new ListResponse<Teacher>(list);
+		SetResponse<Teacher> teachers = new SetResponse<Teacher>(list);
 		return teachers;
 	}
 

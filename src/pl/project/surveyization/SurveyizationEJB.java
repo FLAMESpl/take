@@ -2,6 +2,7 @@ package pl.project.surveyization;
 
 import java.util.List;
 
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,24 +16,26 @@ public class SurveyizationEJB {
 	
 	public void create(Survey survey) {
 		System.out.println("Creating survey!");
+		if(survey.getQuestions() != null){
+		for (Question q : survey.getQuestions())
+			q.survey = survey;
+		}
 		manager.persist(survey);
 	}
 	public void deleteSurvey(int ids) {
 		System.out.println("Deleting survey!");
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", ids);
-		@SuppressWarnings("unchecked")
-		List<Survey> list = q.getResultList();
-		manager.remove( list.get(0));
+		Survey survey = (Survey)q.getSingleResult();
+		manager.remove(survey);
 	}
 	public Survey findSurvey(int ids) {
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", ids);
-		@SuppressWarnings("unchecked")
-		List<Survey> list = q.getResultList();
-		return list.get(0);
+		Survey survey = (Survey)q.getSingleResult();
+		return survey;
 	}
-	public List<Survey> getSurvey(){
+	public List<Survey> getSurveys(){
 		Query q = manager.createQuery("select s from Survey s");
 		@SuppressWarnings("unchecked")
 		List<Survey> list = q.getResultList();
@@ -43,22 +46,24 @@ public class SurveyizationEJB {
 	}
 	public void create(FilledSurvey filled) {
 		System.out.println("Creating filled!");
+		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
+		q.setParameter("ids", filled.ids);
+		Survey survey = (Survey)q.getSingleResult();
+		filled.setParent(survey);
 		manager.persist(filled);
 	}
 	public void deleteFilledSurvey(int idf) {
 		System.out.println("Deleting filled!");
 		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
 		q.setParameter("idf", idf);
-		@SuppressWarnings("unchecked")
-		List<FilledSurvey> list = q.getResultList();
-		manager.remove( list.get(0));
+		FilledSurvey filled = (FilledSurvey)q.getSingleResult();
+		manager.remove(filled);
 	}
 	public FilledSurvey findFilledSurvey(int idf) {
 		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
 		q.setParameter("idf", idf);
-		@SuppressWarnings("unchecked")
-		List<FilledSurvey> list = q.getResultList();
-		return list.get(0);
+		FilledSurvey filled = (FilledSurvey)q.getSingleResult();
+		return filled;
 	}
 	public List<FilledSurvey> getFilledSurvey(){
 		Query q = manager.createQuery("select f from FilledSurvey f");
@@ -77,16 +82,14 @@ public class SurveyizationEJB {
 		System.out.println("Deleting teacher!");
 		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
 		q.setParameter("idt", idt);
-		@SuppressWarnings("unchecked")
-		List<Teacher> list = q.getResultList();
-		manager.remove( list.get(0));
+		Teacher teacher = (Teacher)q.getSingleResult();
+		manager.remove(teacher);
 	}
 	public Teacher findTeacher(int idt) {
 		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
 		q.setParameter("idt", idt);
-		@SuppressWarnings("unchecked")
-		List<Teacher> list = q.getResultList();
-		return list.get(0);
+		Teacher teacher = (Teacher)q.getSingleResult();
+		return teacher;
 	}
 	public List<Teacher> getTeacher(){
 		Query q = manager.createQuery("select t from Teacher t");
