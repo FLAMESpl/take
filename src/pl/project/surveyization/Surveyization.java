@@ -7,12 +7,22 @@ public interface Surveyization {
 
 	public abstract String create(Survey survey);
 	
-	public abstract Survey find(int ids);
+	public abstract Survey findSurvey(int ids);
 
-	public abstract Surveys get();
+	public abstract Surveys getSurveys();
 
 	public abstract String update(Survey survey);
 
-	public abstract String delete(int ids);
+	public abstract String deleteSurvey(int ids);
+	
+	public abstract String create(FilledSurvey filled);
+	
+	public abstract FilledSurvey findFilledSurvey(int idf);
+	
+	public abstract FilledSurveys getFilledSurveys();
+	
+	public abstract String update(FilledSurvey filled);
+	
+	public abstract String deleteFilledSurvey(int idf);
 	
 }

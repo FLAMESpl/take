@@ -22,6 +22,7 @@ public class SurveyizationREST implements Surveyization {
 	
 	@Override
 	@POST
+	@Path("/survey")
 	public String create(Survey survey) {
 		bean.create(survey);
 		return "survey created!";
@@ -29,25 +30,27 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@GET
-	@Path("/{ids}")
-	public Survey find(@PathParam("ids") int ids) {
-		Survey survey = bean.find(ids);
+	@Path("/survey/{ids}")
+	public Survey findSurvey(@PathParam("ids") int ids) {
+		Survey survey = bean.findSurvey(ids);
 		return survey;
 	}
 
 	@Override
 	@GET
-	public Surveys get() {
-		List<Survey> list = bean.get();
+	@Path("/survey")
+	public Surveys getSurveys() {
+		List<Survey> list = bean.getSurvey();
 		Surveys surveys = new Surveys(list);
 		return surveys;
 	}
 
 	@Override
 	@PUT
+	@Path("/survey")
 	public String update(Survey survey) {
 		try {
-			bean.update(survey);
+			bean.updateSurvey(survey);
 			return "survey updated!";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,10 +60,56 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@DELETE
-	@Path("/{ids}")
-	public String delete(@PathParam ("ids") int ids) {
-		bean.delete(ids);	
+	@Path("/survey/{ids}")
+	public String deleteSurvey(@PathParam ("ids") int ids) {
+		bean.deleteSurvey(ids);	
 		return "survey deleted";
+	}
+	
+	@POST
+	@Override
+	@Path("/filledsurvey")
+	public String create(FilledSurvey filled) {
+		bean.create(filled);
+		return "FilledSurvey created!";
+	}
+
+	@Override
+	@GET
+	@Path("/filledsurvey/{idf}")
+	public FilledSurvey findFilledSurvey(int idf) {
+		FilledSurvey filled = bean.findFilledSurvey(idf);
+		return filled;
+	}
+
+	@Override
+	@GET
+	@Path("/filledsurvey")
+	public FilledSurveys getFilledSurveys() {
+		List<FilledSurvey> list = bean.getFilledSurvey();
+		FilledSurveys filled = new FilledSurveys(list);
+		return filled;
+	}
+
+	@Override
+	@PUT
+	@Path("/filledsurvey")
+	public String update(FilledSurvey filled) {
+		try {
+			bean.updateFilledSurvey(filled);
+			return "filled updated!";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "filled not updated :(";
+		}
+	}
+
+	@Override
+	@DELETE
+	@Path("/filledsurvey/{idf}")
+	public String deleteFilledSurvey(int idf) {
+		bean.deleteFilledSurvey(idf);	
+		return "FilledSurvey deleted";
 	}
 
 }

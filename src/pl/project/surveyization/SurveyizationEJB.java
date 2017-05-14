@@ -17,21 +17,42 @@ public class SurveyizationEJB {
 		System.out.println("Creating survey!");
 		manager.persist(survey);
 	}
-	public void delete(int ids) {
+	public void deleteSurvey(int ids) {
 		System.out.println("Deleting survey!");
 		Survey survey = manager.find(Survey.class, ids);
 		manager.remove(survey);
 	}
-	public Survey find(int ids) {
+	public Survey findSurvey(int ids) {
 		return manager.find(Survey.class, ids);
 	}
-	public List<Survey> get(){
+	public List<Survey> getSurvey(){
 		Query q = manager.createQuery("select s from Survey s");
 		@SuppressWarnings("unchecked")
 		List<Survey> list = q.getResultList();
 		return list;
 	}
-	public void update(Survey survey){
+	public void updateSurvey(Survey survey){
 		survey = manager.merge(survey);
+	}
+	public void create(FilledSurvey filled) {
+		System.out.println("Creating filled!");
+		manager.persist(filled);
+	}
+	public void deleteFilledSurvey(int idf) {
+		System.out.println("Deleting filled!");
+		FilledSurvey filled = manager.find(FilledSurvey.class, idf);
+		manager.remove(filled);
+	}
+	public FilledSurvey findFilledSurvey(int idf) {
+		return manager.find(FilledSurvey.class, idf);
+	}
+	public List<FilledSurvey> getFilledSurvey(){
+		Query q = manager.createQuery("select f from FilledSurvey f");
+		@SuppressWarnings("unchecked")
+		List<FilledSurvey> list = q.getResultList();
+		return list;
+	}
+	public void updateFilledSurvey(FilledSurvey filled){
+		filled = manager.merge(filled);
 	}
 }
