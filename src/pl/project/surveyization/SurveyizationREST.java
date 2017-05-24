@@ -97,14 +97,13 @@ public class SurveyizationREST implements Surveyization {
 	@PUT
 	@Path("/filledsurvey")
 	public String update(FilledCreator filled) {
-//		try {
-//			bean.updateFilledSurvey(filled);
-//			return "filled updated!";
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return "filled not updated :(";
-//		}
-		return "filled not updated :(";
+		try {
+			bean.updateFilledSurvey(filled);
+			return "filled updated!";
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return "filled not updated :(";
+		}
 	}
 
 	@Override
@@ -142,7 +141,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@PUT
-	@Path("/teacher}")
+	@Path("/teacher")
 	public String update(Teacher teacher) {
 		try {
 			bean.updateTeacher(teacher);

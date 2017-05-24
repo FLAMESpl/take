@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -25,7 +26,7 @@ public class Teacher implements Serializable {
 	Set<FilledSurvey> surveys = new HashSet<FilledSurvey>();
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@XmlAttribute
 	public int getIdt(){
 		return idt;
@@ -46,7 +47,7 @@ public class Teacher implements Serializable {
 		this.lastName = lastName;
 	}
 	@XmlElement
-	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="evaluated",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=false)
+	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="evaluated",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<FilledSurvey> getFilledSurveys(){
 		return surveys;
 	}

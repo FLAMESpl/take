@@ -83,8 +83,19 @@ public class SurveyizationEJB {
 		List<FilledSurvey> list = q.getResultList();
 		return list;
 	}
-	public void updateFilledSurvey(FilledSurvey filled){
-		filled = manager.merge(filled);
+	public void updateFilledSurvey(FilledCreator filled){
+		System.out.println("Updating filled!");
+		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
+		q.setParameter("ids", filled.ids);
+		Survey survey = (Survey)q.getSingleResult();
+		q = manager.createQuery("select t from Teacher t where t.idt like :idt");
+		q.setParameter("idt", filled.idt);
+		Teacher teacher = (Teacher)q.getSingleResult();
+		FilledSurvey fsurvey = filled.getFilled();
+		System.out.println(fsurvey.getIdf());
+		fsurvey.setParent(survey);
+		fsurvey.setEvaluated(teacher);
+		fsurvey = manager.merge(fsurvey);
 	}
 	public void create(Teacher teacher) {
 		System.out.println("Creating teacher!");

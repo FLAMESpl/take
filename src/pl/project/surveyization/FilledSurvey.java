@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,11 +27,10 @@ public class FilledSurvey implements Serializable {
 	Survey parent;
 	Teacher evaluated;
 	Set<Answer> answers = new HashSet<Answer>();
-	//Set<String> idq = new HashSet<String>();
 	
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@XmlAttribute
 	public int getIdf(){
 		return idf;
@@ -78,10 +78,4 @@ public class FilledSurvey implements Serializable {
 		}
 		this.answers = answers;
 	}
-//	public Set<String> getIdq() {
-//		return idq;
-//	}
-//	public void setIdq(Set<String> idq) {
-//		this.idq = idq;
-//	}
 }
