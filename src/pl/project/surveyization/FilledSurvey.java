@@ -21,13 +21,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class FilledSurvey implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idf;
-	int ids;
-	int idt;
 	String description;
 	String date;
 	Survey parent;
 	Teacher evaluated;
 	Set<Answer> answers = new HashSet<Answer>();
+	//Set<String> idq = new HashSet<String>();
+	
 	
 	@Id
 	@GeneratedValue
@@ -49,18 +49,6 @@ public class FilledSurvey implements Serializable {
 	}
 	public void setDate(String date){
 		this.date = date;
-	}
-	public int getIds(){
-		return ids;
-	}
-	public void setIds(int ids){
-		this.ids = ids;
-	}
-	public int getIdt(){
-		return idt;
-	}
-	public void setIdt(int idt){
-		this.idt = idt;
 	}
 	@ManyToOne
 	@XmlTransient
@@ -89,5 +77,11 @@ public class FilledSurvey implements Serializable {
 			q.filledSurvey = this;
 		}
 		this.answers = answers;
-		}
+	}
+//	public Set<String> getIdq() {
+//		return idq;
+//	}
+//	public void setIdq(Set<String> idq) {
+//		this.idq = idq;
+//	}
 }

@@ -44,7 +44,7 @@ public class SurveyizationEJB {
 	public void updateSurvey(Survey survey){
 		survey = manager.merge(survey);
 	}
-	public void create(FilledSurvey filled) {
+	public void create(FilledCreator filled) {
 		System.out.println("Creating filled!");
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", filled.ids);
@@ -52,17 +52,17 @@ public class SurveyizationEJB {
 		q = manager.createQuery("select t from Teacher t where t.idt like :idt");
 		q.setParameter("idt", filled.idt);
 		Teacher teacher = (Teacher)q.getSingleResult();
-		filled.setParent(survey);
-		filled.setEvaluated(teacher);
-		if(filled.getAnswers() != null){
-			for (Answer a : filled.getAnswers()){
+		filled.getFilled().setParent(survey);
+		filled.getFilled().setEvaluated(teacher);
+		if(filled.getFilled().getAnswers() != null){
+			for (Answer a : filled.getFilled().getAnswers()){
 				q = manager.createQuery("select q from Question q where q.idq like :idq");
 				q.setParameter("idq", a.idq);
 				Question quest = (Question)q.getSingleResult();
 				a.setQuestion(quest);
 			}
 		}
-		manager.persist(filled);
+		manager.persist(filled.getFilled());
 	}
 	public void deleteFilledSurvey(int idf) {
 		System.out.println("Deleting filled!");
