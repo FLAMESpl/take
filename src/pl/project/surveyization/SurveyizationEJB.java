@@ -27,6 +27,7 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", ids);
 		Survey survey = (Survey)q.getSingleResult();
+		survey.filledSurveys.size();
 		manager.remove(survey);
 	}
 	public Survey findSurvey(int ids) {
@@ -126,12 +127,17 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
 		q.setParameter("idt", idt);
 		Teacher teacher = (Teacher)q.getSingleResult();
+		int dummy;
+		for (FilledSurvey filled : teacher.surveys)
+			dummy = filled.getIdf();
 		return teacher;
 	}
 	public List<Teacher> getTeacher(){
 		Query q = manager.createQuery("select t from Teacher t");
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = q.getResultList();
+		for (Teacher teacher : list)
+			teacher.surveys.clear();
 		return list;
 	}
 	public void updateTeacher(Teacher teacher){

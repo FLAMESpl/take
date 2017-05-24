@@ -4,7 +4,6 @@ import java.util.List;
 
 
 import javax.ejb.EJB;
-import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -43,6 +42,8 @@ public class SurveyizationREST implements Surveyization {
 	@Path("/survey")
 	public SetResponse<Survey> getSurveys() {
 		List<Survey> list = bean.getSurveys();
+		for (Survey survey : list)
+			survey.filledSurveys.clear();
 		SetResponse<Survey> surveys = new SetResponse<Survey>(list);
 		return surveys;
 	}
