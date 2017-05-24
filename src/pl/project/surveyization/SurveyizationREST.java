@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import javax.ejb.EJB;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -48,7 +49,7 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@PUT
-	@Path("/survey}")
+	@Path("/survey")
 	public String update(Survey survey) {
 		try {
 			bean.updateSurvey(survey);
@@ -70,9 +71,9 @@ public class SurveyizationREST implements Surveyization {
 	@POST
 	@Override
 	@Path("/filledsurvey")
-	public String create(FilledSurvey filled) {
+	public String create(FilledCreator filled) {
 		bean.create(filled);
-		return "FilledSurvey created!" + filled.getIdf();
+		return "FilledSurvey created!" + filled.getFilled().getIdf();
 	}
 
 	@Override
@@ -95,14 +96,15 @@ public class SurveyizationREST implements Surveyization {
 	@Override
 	@PUT
 	@Path("/filledsurvey")
-	public String update(FilledSurvey filled) {
-		try {
-			bean.updateFilledSurvey(filled);
-			return "filled updated!";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "filled not updated :(";
-		}
+	public String update(FilledCreator filled) {
+//		try {
+//			bean.updateFilledSurvey(filled);
+//			return "filled updated!";
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return "filled not updated :(";
+//		}
+		return "filled not updated :(";
 	}
 
 	@Override

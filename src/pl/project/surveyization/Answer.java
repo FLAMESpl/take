@@ -6,15 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 @Entity
 @XmlRootElement
 public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int ida;
+	@Transient
 	int idq;
 	Question question;
 	FilledSurvey filledSurvey;
@@ -35,6 +38,7 @@ public class Answer implements Serializable {
 	public void setText(String text){
 		this.text = text;
 	}
+	@Transient
 	public int getIdq() {
 		return idq;
 	}

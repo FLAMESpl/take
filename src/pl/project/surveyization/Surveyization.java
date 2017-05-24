@@ -15,13 +15,13 @@ public interface Surveyization {
 
 	public abstract String deleteSurvey(int ids);
 	
-	public abstract String create(FilledSurvey filled);
+	public abstract String create(FilledCreator filled);
 	
 	public abstract FilledSurvey findFilledSurvey(int idf);
 	
 	public abstract SetResponse<FilledSurvey> getFilledSurveys();
 	
-	public abstract String update(FilledSurvey filled);
+	public abstract String update(FilledCreator filled);
 	
 	public abstract String deleteFilledSurvey(int idf);
 	
