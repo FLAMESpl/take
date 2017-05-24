@@ -41,7 +41,7 @@ public class SurveyizationEJB {
 		List<Survey> list = q.getResultList();
 		return list;
 	}
-	public void updateSurvey(Survey survey){
+	public void updateSurvey( Survey survey){
 		survey = manager.merge(survey);
 	}
 	public void create(FilledCreator filled) {
@@ -83,7 +83,7 @@ public class SurveyizationEJB {
 		List<FilledSurvey> list = q.getResultList();
 		return list;
 	}
-	public void updateFilledSurvey(FilledCreator filled){
+	public void updateFilledSurvey(int idf, FilledCreator filled){
 		System.out.println("Updating filled!");
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", filled.ids);
@@ -92,7 +92,7 @@ public class SurveyizationEJB {
 		q.setParameter("idt", filled.idt);
 		Teacher teacher = (Teacher)q.getSingleResult();
 		FilledSurvey fsurvey = filled.getFilled();
-		System.out.println(fsurvey.getIdf());
+		fsurvey.setIdf(idf);
 		fsurvey.setParent(survey);
 		fsurvey.setEvaluated(teacher);
 		fsurvey = manager.merge(fsurvey);
