@@ -75,12 +75,26 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
 		q.setParameter("idf", idf);
 		FilledSurvey filled = (FilledSurvey)q.getSingleResult();
+		if(filled.getAnswers() != null){
+			for (Answer a : filled.getAnswers()){
+				a.idq = a.getQuestion().getIdq();
+			}
+		}
 		return filled;
 	}
 	public List<FilledSurvey> getFilledSurvey(){
 		Query q = manager.createQuery("select f from FilledSurvey f");
 		@SuppressWarnings("unchecked")
 		List<FilledSurvey> list = q.getResultList();
+		if(list.size() != 0){
+			for (FilledSurvey filled : list){
+				if(filled.getAnswers() != null){
+					for (Answer a : filled.getAnswers()){
+						a.idq = a.getQuestion().getIdq();
+					}
+				}
+			}
+		}
 		return list;
 	}
 	public void updateFilledSurvey(int idf, FilledCreator filled){
