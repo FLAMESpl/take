@@ -49,10 +49,11 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@PUT
-	@Path("/survey")
-	public String update(Survey survey) {
+	@Path("/survey/{ids}")
+	public String update(@PathParam("ids") int ids, Survey survey) {
 		try {
-			bean.updateSurvey(survey);
+			survey.setIds(ids);
+			bean.updateSurvey (survey);
 			return "survey updated!";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,10 +96,10 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@PUT
-	@Path("/filledsurvey")
-	public String update(FilledCreator filled) {
+	@Path("/filledsurvey/{idf}")
+	public String update(@PathParam("idf") int idf, FilledCreator filled) {
 		try {
-			bean.updateFilledSurvey(filled);
+			bean.updateFilledSurvey(idf, filled);
 			return "filled updated!";
 		} catch (Exception e) {
 			//e.printStackTrace();
@@ -141,9 +142,10 @@ public class SurveyizationREST implements Surveyization {
 
 	@Override
 	@PUT
-	@Path("/teacher")
-	public String update(Teacher teacher) {
+	@Path("/teacher/{idt}")
+	public String update(@PathParam("idt") int idt ,Teacher teacher) {
 		try {
+			teacher.setidt(idt);
 			bean.updateTeacher(teacher);
 			return "teacher updated!";
 		} catch (Exception e) {

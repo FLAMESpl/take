@@ -10,7 +10,7 @@
 		{
 			"name": "survey",
 			"request": {
-				"url": "http://localhost:8080/take/surveyization",
+				"url": "http://localhost:8080/take/surveyization/survey",
 				"method": "POST",
 				"header": [
 					{
@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<survey>\n\t<date>01-01-2015</date>\n\t<description>siema</description>\n\t<questions>\n\t\t\t<text>olewamcie</text>\n\t</questions>\n\t<questions>\n\t\t<text>dlaczegoula</text>\n\t</questions>\n</survey>"
+					"raw": "\n<createSurvey>\n<survey>\n\t<date>01-01-2015</date>\n\t<description>asdad</description>\n\t<questions>\n\t\t\t<text>sdadad</text>\n\t</questions>\n\t<questions>\n\t\t<text>asdasd</text>\n\t</questions>\n</survey>\n<idt>4</idt>\n</createSurvey>"
 				},
 				"description": "asd"
 			},

@@ -11,7 +11,7 @@ public interface Surveyization {
 
 	public abstract SetResponse<Survey> getSurveys();
 
-	public abstract String update(Survey survey);
+	public abstract String update(int ids, Survey survey);
 
 	public abstract String deleteSurvey(int ids);
 	
@@ -21,7 +21,7 @@ public interface Surveyization {
 	
 	public abstract SetResponse<FilledSurvey> getFilledSurveys();
 	
-	public abstract String update(FilledCreator filled);
+	public abstract String update(int idf, FilledCreator filled);
 	
 	public abstract String deleteFilledSurvey(int idf);
 	
@@ -31,7 +31,7 @@ public interface Surveyization {
 
 	public abstract SetResponse<Teacher> getTeachers();
 
-	public abstract String update(Teacher teacher);
+	public abstract String update(int idt, Teacher teacher);
 
 	public abstract String deleteTeacher(int idt);
 	
