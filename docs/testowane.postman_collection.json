@@ -8,10 +8,10 @@
 	},
 	"item": [
 		{
-			"name": "survey",
+			"name": "createsurvey",
 			"request": {
 				"url": "http://localhost:8080/take/surveyization/survey",
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -21,17 +21,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "\n<createSurvey>\n<survey>\n\t<date>01-01-2015</date>\n\t<description>asdad</description>\n\t<questions>\n\t\t\t<text>sdadad</text>\n\t</questions>\n\t<questions>\n\t\t<text>asdasd</text>\n\t</questions>\n</survey>\n<idt>4</idt>\n</createSurvey>"
+					"raw": "<survey>\n\t<date>01-01-2010</date>\n\t<description>witam</description>\n\t<questions>\n\t\t\t<text>sdadad</text>\n\t</questions>\n\t<questions>\n\t\t<text>asdasd</text>\n\t</questions>\n</survey>\n\n"
 				},
 				"description": "asd"
 			},
 			"response": []
 		},
 		{
-			"name": "filledsurvey",
+			"name": "createfilledsurvey",
 			"request": {
-				"url": "http://localhost:8080/take/surveyization/filledsurvey",
-				"method": "POST",
+				"url": "http://localhost:8080/take/surveyization/filledsurvey/6",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -41,20 +41,60 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<survey>\n\t<date>01-01-2015</date>\n\t<description>siema</description>\n\t<questions>\n\t\t\t<text>olewamcie</text>\n\t</questions>\n\t<questions>\n\t\t<text>dlaczegoula</text>\n\t</questions>\n</survey>"
+					"raw": "<filledCreator>\n\t<ids>4</ids>\n\t<idt>1</idt>\n\t<filled>\n\t\t<date>10-10-2010</date>\n\t\t<description>opis</description>\n\t\t<answers>\n\t\t\t<text>wez</text>\n\t\t\t<idq>7</idq>\n\t\t</answers>\n\t\t<answers>\n\t\t\t<text>zadzialaj</text>\n\t\t\t<idq>8</idq>\n\t\t</answers>\n\t</filled>\n</filledCreator>"
 				},
 				"description": "asdadada"
 			},
 			"response": []
 		},
 		{
-			"name": "teacher",
+			"name": "createteacher",
+			"request": {
+				"url": "http://localhost:8080/take/surveyization/teacher",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<teacher>\n\t<firstName>kamil</firstName>\n\t<lastName>ciec</lastName>\n</teacher>"
+				},
+				"description": "sad"
+			},
+			"response": []
+		},
+		{
+			"name": "editfilled",
+			"request": {
+				"url": "http://localhost:8080/take/surveyization/filledsurvey/6",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<filledCreator>\n\t<ids>4</ids>\n\t<idt>1</idt>\n\t<filled>\n\t\t<date>10-10-2010</date>\n\t\t<description>opis</description>\n\t</filled>\n</filledCreator>"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "editteacher",
 			"request": {
 				"url": "",
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"body": {},
-				"description": "sad"
+				"description": ""
 			},
 			"response": []
 		}

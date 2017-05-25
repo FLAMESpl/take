@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.ejb.TransactionAttribute;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -56,7 +57,7 @@ public class Survey implements Serializable {
 		this.questions = questions;
 		}
 	@XmlElement
-	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="parent",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="parent",cascade=CascadeType.MERGE,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<FilledSurvey> getFilledSurveys(){
 		return filledSurveys;
 	}

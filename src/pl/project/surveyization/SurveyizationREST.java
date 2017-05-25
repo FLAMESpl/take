@@ -4,7 +4,6 @@ import java.util.List;
 
 
 import javax.ejb.EJB;
-import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -102,7 +101,7 @@ public class SurveyizationREST implements Surveyization {
 			bean.updateFilledSurvey(idf, filled);
 			return "filled updated!";
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return "filled not updated :(";
 		}
 	}
