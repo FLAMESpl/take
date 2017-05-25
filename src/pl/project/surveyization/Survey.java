@@ -56,9 +56,8 @@ public class Survey implements Serializable {
 	public void setQuestions(Set<Question> questions){
 		this.questions = questions;
 		}
-	@TransactionAttribute
 	@XmlElement
-	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="parent",cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="parent",cascade=CascadeType.MERGE,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<FilledSurvey> getFilledSurveys(){
 		return filledSurveys;
 	}

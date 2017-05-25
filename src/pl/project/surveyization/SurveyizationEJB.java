@@ -27,7 +27,6 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
 		q.setParameter("ids", ids);
 		Survey survey = (Survey)q.getSingleResult();
-		survey.filledSurveys.size();
 		manager.remove(survey);
 	}
 	public Survey findSurvey(int ids) {
@@ -43,6 +42,15 @@ public class SurveyizationEJB {
 		return list;
 	}
 	public void updateSurvey( Survey survey){
+		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
+		q.setParameter("ids", survey.getIds());
+		Survey old  = (Survey)q.getSingleResult();
+		for (FilledSurvey filled : old.getFilledSurveys()){
+			filled.setParent(survey);
+		}
+		for (Question question : old.getQuestions()){
+			question.setSurvey(survey);
+		}
 		survey = manager.merge(survey);
 	}
 	public void create(FilledCreator filled) {
@@ -99,17 +107,16 @@ public class SurveyizationEJB {
 		return list;
 	}
 	public void updateFilledSurvey(int idf, FilledCreator filled){
-		System.out.println("Updating filled!");
-		Query q = manager.createQuery("select s from Survey s where s.ids like :ids");
-		q.setParameter("ids", filled.ids);
-		Survey survey = (Survey)q.getSingleResult();
-		q = manager.createQuery("select t from Teacher t where t.idt like :idt");
-		q.setParameter("idt", filled.idt);
-		Teacher teacher = (Teacher)q.getSingleResult();
 		FilledSurvey fsurvey = filled.getFilled();
 		fsurvey.setIdf(idf);
-		fsurvey.setParent(survey);
-		fsurvey.setEvaluated(teacher);
+		Query q = manager.createQuery("select f from FilledSurvey f where f.idf like :idf");
+		q.setParameter("idf", idf);
+		FilledSurvey old  = (FilledSurvey)q.getSingleResult();
+		for (Answer answer : old.getAnswers()){
+			answer.setFilledSurvey(fsurvey);
+		}
+		fsurvey.setEvaluated(old.getEvaluated());
+		fsurvey.setParent(old.getParent());
 		fsurvey = manager.merge(fsurvey);
 	}
 	public void create(Teacher teacher) {
@@ -127,20 +134,30 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
 		q.setParameter("idt", idt);
 		Teacher teacher = (Teacher)q.getSingleResult();
-		int dummy;
-		for (FilledSurvey filled : teacher.surveys)
-			dummy = filled.getIdf();
+		if(teacher.getFilledSurveys().size() != 0){
+			for (FilledSurvey filled : teacher.getFilledSurveys()){
+				if(filled.getAnswers() != null){
+					for (Answer a : filled.getAnswers()){
+						a.idq = a.getQuestion().getIdq();
+					}
+				}
+			}
+		}
 		return teacher;
 	}
 	public List<Teacher> getTeacher(){
 		Query q = manager.createQuery("select t from Teacher t");
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = q.getResultList();
-		for (Teacher teacher : list)
-			teacher.surveys.clear();
 		return list;
 	}
 	public void updateTeacher(Teacher teacher){
+		Query q = manager.createQuery("select t from Teacher t where t.idt like :idt");
+		q.setParameter("idt", teacher.getIdt());
+		Teacher old  = (Teacher)q.getSingleResult();
+		for (FilledSurvey filled : old.getFilledSurveys()){
+			filled.setEvaluated(teacher);
+		}
 		teacher = manager.merge(teacher);
 	}
 }

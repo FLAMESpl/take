@@ -42,8 +42,6 @@ public class SurveyizationREST implements Surveyization {
 	@Path("/survey")
 	public SetResponse<Survey> getSurveys() {
 		List<Survey> list = bean.getSurveys();
-		for (Survey survey : list)
-			survey.filledSurveys.clear();
 		SetResponse<Survey> surveys = new SetResponse<Survey>(list);
 		return surveys;
 	}
@@ -103,7 +101,7 @@ public class SurveyizationREST implements Surveyization {
 			bean.updateFilledSurvey(idf, filled);
 			return "filled updated!";
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return "filled not updated :(";
 		}
 	}

@@ -47,7 +47,7 @@ public class Teacher implements Serializable {
 		this.lastName = lastName;
 	}
 	@XmlElement
-	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="evaluated",cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@OneToMany(targetEntity=FilledSurvey.class,mappedBy="evaluated",cascade=CascadeType.MERGE,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<FilledSurvey> getFilledSurveys(){
 		return surveys;
 	}
