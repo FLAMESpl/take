@@ -26,6 +26,7 @@ public class FilledSurvey implements Serializable {
 	String date;
 	Survey parent;
 	Teacher evaluated;
+	boolean deleted;
 	Set<Answer> answers = new HashSet<Answer>();
 	
 	
@@ -77,5 +78,11 @@ public class FilledSurvey implements Serializable {
 			q.filledSurvey = this;
 		}
 		this.answers = answers;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 }
