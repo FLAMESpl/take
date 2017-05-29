@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.ejb.TransactionAttribute;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,6 +22,7 @@ public class Survey implements Serializable {
 	private int ids;
 	String description;
 	String date;
+	boolean deleted;
 	
 	Set<Question> questions = new HashSet<Question>();
 	Set<FilledSurvey> filledSurveys = new HashSet<FilledSurvey>();
@@ -49,7 +49,7 @@ public class Survey implements Serializable {
 		this.date = date;
 	}
 	@XmlElement
-	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.MERGE,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<Question> getQuestions(){
 		return questions;
 	}
@@ -63,6 +63,12 @@ public class Survey implements Serializable {
 	}
 	public void setFilledSurveys(Set<FilledSurvey> filledSurveys){
 		this.filledSurveys = filledSurveys;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }

@@ -11,7 +11,7 @@
 			"name": "createsurvey",
 			"request": {
 				"url": "http://localhost:8080/take/surveyization/survey",
-				"method": "PUT",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<survey>\n\t<date>01-01-2010</date>\n\t<description>witam</description>\n\t<questions>\n\t\t\t<text>sdadad</text>\n\t</questions>\n\t<questions>\n\t\t<text>asdasd</text>\n\t</questions>\n</survey>\n\n"
+					"raw": "<survey>\n\t<date>01-01-2010</date>\n\t<description>witam</description>\n\t<deleted>false</deleted>\n\t<questions>\n\t\t\t<text>sdadad</text>\n\t</questions>\n\t<questions>\n\t\t<text>asdasd</text>\n\t</questions>\n</survey>\n\n"
 				},
 				"description": "asd"
 			},
@@ -30,8 +30,8 @@
 		{
 			"name": "createfilledsurvey",
 			"request": {
-				"url": "http://localhost:8080/take/surveyization/filledsurvey/6",
-				"method": "PUT",
+				"url": "http://localhost:8080/take/surveyization/filledsurvey",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<filledCreator>\n\t<ids>4</ids>\n\t<idt>1</idt>\n\t<filled>\n\t\t<date>10-10-2010</date>\n\t\t<description>opis</description>\n\t\t<answers>\n\t\t\t<text>wez</text>\n\t\t\t<idq>7</idq>\n\t\t</answers>\n\t\t<answers>\n\t\t\t<text>zadzialaj</text>\n\t\t\t<idq>8</idq>\n\t\t</answers>\n\t</filled>\n</filledCreator>"
+					"raw": "<filledCreator>\n\t<ids>5</ids>\n\t<idt>3</idt>\n\t<filled>\n\t\t<date>10-10-2010</date>\n\t\t<description>opis</description>\n\t\t<deleted>false</deleted>\n\t\t<answers>\n\t\t\t<text>wez</text>\n\t\t\t<idq>41</idq>\n\t\t</answers>\n\t\t<answers>\n\t\t\t<text>zadzialaj</text>\n\t\t\t<idq>42</idq>\n\t\t</answers>\n\t</filled>\n</filledCreator>"
 				},
 				"description": "asdadada"
 			},
@@ -50,8 +50,8 @@
 		{
 			"name": "createteacher",
 			"request": {
-				"url": "http://localhost:8080/take/surveyization/teacher",
-				"method": "GET",
+				"url": "http://localhost:8080/take/surveyization/teacher/2",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -61,7 +61,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<teacher>\n\t<firstName>kamil</firstName>\n\t<lastName>ciec</lastName>\n</teacher>"
+					"raw": "<teacher>\n\t<firstName>kamil</firstName>\n\t<lastName>ciec</lastName>\n\t<deleted>false</deleted>\n</teacher>"
 				},
 				"description": "sad"
 			},

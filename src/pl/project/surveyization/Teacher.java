@@ -22,6 +22,7 @@ public class Teacher implements Serializable {
 	private int idt;
 	String firstName;
 	String lastName;
+	boolean deleted;
 	
 	Set<FilledSurvey> surveys = new HashSet<FilledSurvey>();
 	
@@ -53,5 +54,11 @@ public class Teacher implements Serializable {
 	}
 	public void setFilledSurveys(Set<FilledSurvey> surveys){
 		this.surveys = surveys;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 }
