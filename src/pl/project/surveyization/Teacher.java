@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -55,6 +56,7 @@ public class Teacher implements Serializable {
 	public void setFilledSurveys(Set<FilledSurvey> surveys){
 		this.surveys = surveys;
 	}
+	@XmlTransient
 	public boolean isDeleted() {
 		return deleted;
 	}
