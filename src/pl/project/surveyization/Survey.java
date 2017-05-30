@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -49,7 +50,7 @@ public class Survey implements Serializable {
 		this.date = date;
 	}
 	@XmlElement
-	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.MERGE,fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(targetEntity=Question.class,mappedBy="survey",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<Question> getQuestions(){
 		return questions;
 	}
@@ -64,6 +65,7 @@ public class Survey implements Serializable {
 	public void setFilledSurveys(Set<FilledSurvey> filledSurveys){
 		this.filledSurveys = filledSurveys;
 	}
+	@XmlTransient
 	public boolean isDeleted() {
 		return deleted;
 	}

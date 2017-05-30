@@ -79,6 +79,7 @@ public class FilledSurvey implements Serializable {
 		}
 		this.answers = answers;
 	}
+	@XmlTransient
 	public boolean isDeleted() {
 		return deleted;
 	}
