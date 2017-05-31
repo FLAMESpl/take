@@ -21,7 +21,7 @@ public interface Surveyization {
 	
 	public abstract SetResponse<FilledSurvey> getFilledSurveys();
 	
-	public abstract String update(int idf, FilledCreator filled);
+	public abstract String update(int idf, FilledSurvey filled);
 	
 	public abstract String deleteFilledSurvey(int idf);
 	

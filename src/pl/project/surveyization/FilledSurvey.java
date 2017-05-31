@@ -22,11 +22,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class FilledSurvey implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idf;
-	String description;
-	String date;
-	Survey parent;
-	Teacher evaluated;
-	boolean deleted;
+	private String description;
+	private String date;
+	private Survey parent;
+	private Teacher evaluated;
+	private boolean deleted;
+	
 	Set<Answer> answers = new HashSet<Answer>();
 	
 	
@@ -75,7 +76,7 @@ public class FilledSurvey implements Serializable {
 	public void setAnswers(Set<Answer> answers){
 		if(answers != null){
 		for (Answer q : answers)
-			q.filledSurvey = this;
+			q.setFilledSurvey(this);
 		}
 		this.answers = answers;
 	}
