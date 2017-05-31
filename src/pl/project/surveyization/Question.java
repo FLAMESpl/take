@@ -22,8 +22,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idq;
-	Survey survey;
-	String text;	
+	private Survey survey;
+	private String text;
+	
 	Set<Answer> answers = new HashSet<Answer>();
 	
 	@Id

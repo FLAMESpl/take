@@ -17,32 +17,43 @@ public class SurveyizationEJB {
 		System.out.println("Creating survey!");
 		if(survey.getQuestions() != null){
 			for (Question q : survey.getQuestions()){
-				q.survey = survey;
+				q.setSurvey(survey);
 			}
 		}
 		manager.persist(survey);
 	}
-	public void deleteSurvey(int ids) {
+	public String deleteSurvey(int ids) {
 		System.out.println("Deleting survey!");
 		Query q = manager.createQuery("select s from Survey s where s.ids = :ids");
 		q.setParameter("ids", ids);
 		Survey survey = (Survey)q.getSingleResult();
 		survey.setDeleted(true);
 		manager.merge(survey);
+		return survey.getDescription();
 	}
 	public Survey findSurvey(int ids) {
 		Query q = manager.createQuery("select s from Survey s where s.ids = :ids and s.deleted = false");
 		q.setParameter("ids", ids);
 		Survey survey = (Survey)q.getSingleResult();
+		for (FilledSurvey filled : survey.getFilledSurveys()){
+			if (filled.isDeleted() == true)
+				survey.getFilledSurveys().remove(filled);
+		}
 		return survey;
 	}
 	public List<Survey> getSurveys(){
 		Query q = manager.createQuery("select s from Survey s where s.deleted = false");
 		@SuppressWarnings("unchecked")
 		List<Survey> list = q.getResultList();
+		for (Survey survey : list){
+			for (FilledSurvey filled : survey.getFilledSurveys()){
+				if (filled.isDeleted() == true)
+					survey.getFilledSurveys().remove(filled);
+			}
+		}
 		return list;
 	}
-	public void updateSurvey( Survey survey){
+	public void updateSurvey(Survey survey){
 		Query q = manager.createQuery("select s from Survey s where s.ids = :ids");
 		q.setParameter("ids", survey.getIds());
 		Survey old  = (Survey)q.getSingleResult();
@@ -71,20 +82,21 @@ public class SurveyizationEJB {
 		if(filled.getFilled().getAnswers() != null){
 			for (Answer a : filled.getFilled().getAnswers()){
 				q = manager.createQuery("select q from Question q where q.idq = :idq");
-				q.setParameter("idq", a.idq);
+				q.setParameter("idq", a.getIdq());
 				Question quest = (Question)q.getSingleResult();
 				a.setQuestion(quest);
 			}
 		}
 		manager.persist(filled.getFilled());
 	}
-	public void deleteFilledSurvey(int idf) {
+	public String deleteFilledSurvey(int idf) {
 		System.out.println("Deleting filled!");
 		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
 		q.setParameter("idf", idf);
 		FilledSurvey filled = (FilledSurvey)q.getSingleResult();
 		filled.setDeleted(true);
 		manager.persist(filled);
+		return filled.getDescription();
 	}
 	public FilledSurvey findFilledSurvey(int idf) {
 		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf and f.deleted = false");
@@ -92,7 +104,7 @@ public class SurveyizationEJB {
 		FilledSurvey filled = (FilledSurvey)q.getSingleResult();
 		if(filled.getAnswers() != null){
 			for (Answer a : filled.getAnswers()){
-				a.idq = a.getQuestion().getIdq();
+				a.setIdq(a.getQuestion().getIdq());
 			}
 		}
 		return filled;
@@ -105,50 +117,55 @@ public class SurveyizationEJB {
 			for (FilledSurvey filled : list){
 				if(filled.getAnswers() != null){
 					for (Answer a : filled.getAnswers()){
-						a.idq = a.getQuestion().getIdq();
+						a.setIdq(a.getQuestion().getIdq());
 					}
 				}
 			}
 		}
 		return list;
 	}
-	public void updateFilledSurvey(int idf, FilledCreator filled){
-		FilledSurvey fsurvey = filled.getFilled();
-		fsurvey.setIdf(idf);
+	public void updateFilledSurvey(int idf, FilledSurvey filled){
+		filled.setIdf(idf);
 		Query q = manager.createQuery("select f from FilledSurvey f where f.idf = :idf");
 		q.setParameter("idf", idf);
 		FilledSurvey old  = (FilledSurvey)q.getSingleResult();
-		for (Answer answer : old.getAnswers()){
-			answer.setFilledSurvey(fsurvey);
+		q = manager.createQuery("delete from Answer where filledsurvey_idf = :idf");
+		q.setParameter("idf", idf);
+		int deletedcount = q.executeUpdate();
+		filled.setEvaluated(old.getEvaluated());
+		filled.setParent(old.getParent());
+		if(filled.getAnswers() != null){
+			for (Answer a : filled.getAnswers()){
+				q = manager.createQuery("select q from Question q where q.idq = :idq");
+				q.setParameter("idq", a.getIdq());
+				Question quest = (Question)q.getSingleResult();
+				a.setQuestion(quest);
+			}
 		}
-		fsurvey.setEvaluated(old.getEvaluated());
-		fsurvey.setParent(old.getParent());
-		fsurvey = manager.merge(fsurvey);
+		filled = manager.merge(filled);
 	}
 	public void create(Teacher teacher) {
 		System.out.println("Creating teacher!");
 		manager.persist(teacher);
 	}
-	public void deleteTeacher(int idt) {
+	public String deleteTeacher(int idt) {
 		System.out.println("Deleting teacher!");
 		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
 		q.setParameter("idt", idt);
 		Teacher teacher = (Teacher)q.getSingleResult();
 		teacher.setDeleted(true);
-		manager.persist(teacher);
+		for (FilledSurvey filled : teacher.getFilledSurveys())
+			filled.setDeleted(true);
+		manager.merge(teacher);
+		return (teacher.getFirstName() + " " + teacher.getLastName());
 	}
 	public Teacher findTeacher(int idt) {
 		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt and t.deleted = false");
 		q.setParameter("idt", idt);
 		Teacher teacher = (Teacher)q.getSingleResult();
-		if(teacher.getFilledSurveys().size() != 0){
-			for (FilledSurvey filled : teacher.getFilledSurveys()){
-				if(filled.getAnswers() != null){
-					for (Answer a : filled.getAnswers()){
-						a.idq = a.getQuestion().getIdq();
-					}
-				}
-			}
+		for (FilledSurvey filled : teacher.getFilledSurveys()){
+			if (filled.isDeleted() == true)
+				teacher.getFilledSurveys().remove(filled);
 		}
 		return teacher;
 	}
@@ -156,6 +173,12 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select t from Teacher t where t.deleted = false");
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = q.getResultList();
+		for (Teacher teacher : list){
+			for (FilledSurvey filled : teacher.getFilledSurveys()){
+				if (filled.isDeleted() == true)
+					teacher.getFilledSurveys().remove(filled);
+			}
+		}
 		return list;
 	}
 	public void updateTeacher(Teacher teacher){

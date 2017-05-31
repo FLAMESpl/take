@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Survey implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int ids;
-	String description;
-	String date;
-	boolean deleted;
+	private String description;
+	private String date;
+	private boolean deleted;
 	
 	Set<Question> questions = new HashSet<Question>();
 	Set<FilledSurvey> filledSurveys = new HashSet<FilledSurvey>();

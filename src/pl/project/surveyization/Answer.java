@@ -19,10 +19,10 @@ public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int ida;
 	@Transient
-	int idq;
-	Question question;
-	FilledSurvey filledSurvey;
-	String text;	
+	private int idq;
+	private Question question;
+	private FilledSurvey filledSurvey;
+	private String text;	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
