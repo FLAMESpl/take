@@ -26,7 +26,11 @@ public class SurveyizationREST implements Surveyization {
 	@Path("/survey")
 	public String create(Survey survey) {
 		bean.create(survey);
-		return "survey created!" + survey.getIds();
+		String response = "survey created!" + survey.getIds();
+		for (Question q : survey.getQuestions()){
+			response += ("\n " + q.getText() + " " + q.getIdq());
+		}
+		return response;
 	}
 
 	@Override
