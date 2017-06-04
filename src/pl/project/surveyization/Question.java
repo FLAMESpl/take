@@ -50,7 +50,7 @@ public class Question implements Serializable {
 	public void setSurvey(Survey survey){
 		this.survey = survey;
 	}
-	@XmlElement
+	@XmlTransient
 	@OneToMany(targetEntity=Answer.class,mappedBy="question",cascade=CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
 	public Set<Answer> getAnswers(){
 		return answers;

@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<filledCreator>\n\t<ids>2</ids>\n\t<idt>1</idt>\n\t<filled>\n\t\t<date>10-10-2010</date>\n\t\t<description>opis</description>\n\t\t<answers>\n\t\t\t<text>wez</text>\n\t\t\t<idq>2</idq>\n\t\t</answers>\n\t\t<answers>\n\t\t\t<text>zadzialaj</text>\n\t\t\t<idq>1</idq>\n\t\t</answers>\n\t</filled>\n</filledCreator>"
+					"raw": "<filledCreator>\n\t<ids>3</ids>\n\t<idt>6</idt>\n\t<filled>\n\t\t<date>10-10-2010</date>\n\t\t<description>opis</description>\n\t\t<answers>\n\t\t\t<text>witam</text>\n\t\t\t<idq>5</idq>\n\t\t</answers>\n\t\t<answers>\n\t\t\t<text>test</text>\n\t\t\t<idq>6</idq>\n\t\t</answers>\n\t</filled>\n</filledCreator>"
 				},
 				"description": "asdadada"
 			},
@@ -51,7 +51,7 @@
 			"name": "createteacher",
 			"request": {
 				"url": "http://localhost:8080/take/surveyization/teacher/2",
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -61,7 +61,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<teacher>\n\t<firstName>kamil</firstName>\n\t<lastName>ciec</lastName>\n\t<deleted>false</deleted>\n</teacher>"
+					"raw": "<teacher>\n\t<firstName>kamil</firstName>\n\t<lastName>ciec</lastName>\n</teacher>"
 				},
 				"description": "sad"
 			},
