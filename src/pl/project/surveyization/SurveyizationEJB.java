@@ -1,5 +1,6 @@
 package pl.project.surveyization;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,28 +37,12 @@ public class SurveyizationEJB {
 		Query q = manager.createQuery("select s from Survey s where s.ids = :ids and s.deleted = false");
 		q.setParameter("ids", ids);
 		Survey survey = (Survey)q.getSingleResult();
-		Iterator<FilledSurvey> it = survey.getFilledSurveys().iterator();
-		while (it.hasNext()){
-			FilledSurvey filled = it.next();
-			if (filled.isDeleted() == true){
-				it.remove();
-			}
-		}
 		return survey;
 	}
 	public List<Survey> getSurveys(){
 		Query q = manager.createQuery("select s from Survey s where s.deleted = false");
 		@SuppressWarnings("unchecked")
 		List<Survey> list = q.getResultList();
-		for (Survey survey : list){
-			Iterator<FilledSurvey> it = survey.getFilledSurveys().iterator();
-			while (it.hasNext()){
-				FilledSurvey filled = it.next();
-				if (filled.isDeleted() == true){
-					it.remove();
-				}
-			}
-		}
 		return list;		
 	}
 	public void updateSurvey(Survey survey){
@@ -75,8 +60,6 @@ public class SurveyizationEJB {
 			question.setSurvey(survey);
 			survey.questions.add(question);
 		}
-//		old.questions.clear();
-//		old.filledSurveys.clear();
 		manager.merge(survey);
 	}
 	public void create(FilledCreator filled) {
@@ -114,6 +97,7 @@ public class SurveyizationEJB {
 		FilledSurvey filled = (FilledSurvey)q.getSingleResult();
 		if(filled.getAnswers() != null){
 			for (Answer a : filled.getAnswers()){
+				a.setQuestionText(a.getQuestion().getText());
 				a.setIdq(a.getQuestion().getIdq());
 			}
 		}
@@ -127,6 +111,7 @@ public class SurveyizationEJB {
 			for (FilledSurvey filled : list){
 				if(filled.getAnswers() != null){
 					for (Answer a : filled.getAnswers()){
+						a.setQuestionText(a.getQuestion().getText());
 						a.setIdq(a.getQuestion().getIdq());
 					}
 				}
@@ -146,8 +131,8 @@ public class SurveyizationEJB {
 		filled.setParent(old.getParent());
 		if(filled.getAnswers() != null){
 			for (Answer a : filled.getAnswers()){
-				q = manager.createQuery("select q from Question q where q.idq = :idq");
-				q.setParameter("idq", a.getIdq());
+				q = manager.createQuery("select q from Question q where q.text = :text");
+				q.setParameter("text", a.getQuestionText());
 				Question quest = (Question)q.getSingleResult();
 				a.setQuestion(quest);
 			}
@@ -176,35 +161,22 @@ public class SurveyizationEJB {
 		for (FilledSurvey filled : teacher.getFilledSurveys()){
 			if (filled.isDeleted() == true)
 				teacher.getFilledSurveys().remove(filled);
+			for (Answer a : filled.getAnswers()){
+				a.setQuestionText(a.getQuestion().getText());
+				a.setIdq(a.getQuestion().getIdq());
+			}
 		}
 		return teacher;
 	}
 	public List<Teacher> getTeacher(){
 		Query q = manager.createQuery("select t from Teacher t where t.deleted = false");
 		@SuppressWarnings("unchecked")
-		List<Teacher> list = q.getResultList();
-		for (Teacher teacher : list){
-			Iterator<FilledSurvey> it = teacher.getFilledSurveys().iterator();
-			while (it.hasNext()){
-				FilledSurvey filled = it.next();
-				if (filled.isDeleted() == true){
-					it.remove();
-				}
-			}
-		}
-		return list;
+		List<Teacher> dblist = q.getResultList();
+		for (Teacher teacher : dblist)
+			teacher.getFilledSurveys().clear();
+		return dblist;
 	}
 	public void updateTeacher(Teacher teacher){
-		Query q = manager.createQuery("select t from Teacher t where t.idt = :idt");
-		q.setParameter("idt", teacher.getIdt());
-		Teacher old  = (Teacher)q.getSingleResult();
-		Iterator<FilledSurvey> it = teacher.getFilledSurveys().iterator();
-		while (it.hasNext()){
-			FilledSurvey filled = it.next();
-			if (filled.isDeleted() == true){
-				it.remove();
-			}
-		}
 		teacher = manager.merge(teacher);
 	}
 }
