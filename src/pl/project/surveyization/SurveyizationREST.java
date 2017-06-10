@@ -54,16 +54,15 @@ public class SurveyizationREST implements Surveyization {
 	@PUT
 	@Path("/survey/{ids}")
 	public String update(@PathParam("ids") int ids, Survey survey) {
-		try {
-			survey.setIds(ids);
-			bean.updateSurvey (survey);
-			return "survey updated!";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "survey not updated :(";
+		bean.deleteSurvey(ids);
+		bean.create(survey);
+		String response = "survey created!" + survey.getIds();
+		for (Question q : survey.getQuestions()){
+			response += ("\n " + q.getText() + " " + q.getIdq());
 		}
+		return response;
 	}
-
+	
 	@Override
 	@DELETE
 	@Path("/survey/{ids}")
